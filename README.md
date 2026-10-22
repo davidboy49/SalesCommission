@@ -1,6 +1,6 @@
-# Hanuman Beverages – Sales Commission
+# Sales Commission
 
-Commission calculation for outdoor sales staff. Angular 22 frontend, .NET 10 API, PostgreSQL.
+Commission calculation for the outdoor sales staff of Hanuman Beverages. Angular 22 frontend, .NET 10 API, PostgreSQL.
 Scope and decisions: [docs/01-plan-and-scoping.md](docs/01-plan-and-scoping.md).
 
 Status: Milestone 1 (core demo with mock data) – plans, monthly calculation, dashboard, results with

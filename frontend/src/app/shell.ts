@@ -9,7 +9,7 @@ import { PeriodState } from './core/period-state';
   imports: [RouterOutlet, RouterLink, RouterLinkActive, FormsModule],
   template: `
     <header class="top">
-      <div class="brand">Hanuman <span>Commission</span></div>
+      <div class="brand">Sales <span>Commission</span></div>
 
       <nav aria-label="Main">
         @if (auth.isReviewer()) {

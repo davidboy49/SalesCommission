@@ -10,7 +10,7 @@ import { AuthService } from '../core/auth';
   template: `
     <main class="wrap">
       <form class="card" (ngSubmit)="submit()" #form="ngForm">
-        <h1>Hanuman <span class="accent">Commission</span></h1>
+        <h1>Sales <span class="accent">Commission</span></h1>
         <p class="muted">Sign in to see commission results.</p>
 
         <label class="field">
