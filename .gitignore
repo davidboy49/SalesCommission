@@ -1,0 +1,14 @@
+# build output
+bin/
+obj/
+dist/
+.angular/
+node_modules/
+
+# local PostgreSQL binaries and data (see scripts/start-db.ps1)
+.pg/
+
+# IDE
+.vs/
+.idea/
+*.user
