@@ -31,6 +31,9 @@ Needs the .NET 10 SDK and Node.js. Run each command from the repository root, in
    npm --prefix frontend start
    ```
 
+The frontend calls a relative `/api`; `ng serve` forwards it to the API on port 5124 (`frontend/proxy.conf.json`).
+In production a reverse proxy does the same, so one build works on any host.
+
 Open http://localhost:4200. Demo logins (`admin`, `finance`, `manager`, `supervisor`, `rep` at `@hanuman.local`)
 share the password in `backend/src/SalesCommission.Api/appsettings.Development.json` (`Seed:DevPassword`).
 Choose a period in the header; Admin/Finance press **Calculate** on the dashboard.

@@ -10,7 +10,8 @@ import {
   ResultSummary,
 } from './models';
 
-export const API_URL = 'http://localhost:5124/api';
+/** Relative so the same build works behind any host; `ng serve` proxies it (proxy.conf.json), a reverse proxy does in production. */
+export const API_URL = '/api';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
