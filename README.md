@@ -40,6 +40,11 @@ Choose a period in the header; Admin/Finance press **Calculate** on the dashboar
 
 To reseed from scratch, drop the schema (`DROP SCHEMA public CASCADE; CREATE SCHEMA public;`) and restart the API.
 
+## Plan and architecture
+
+[docs/03-master-plan.md](docs/03-master-plan.md) has the roadmap and architecture diagrams.
+Interactive versions are in `docs/diagrams/` (`architecture.html`, `roadmap.html`); open them in a browser.
+
 ## Checks
 
 ```powershell

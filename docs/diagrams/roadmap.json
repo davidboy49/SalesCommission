@@ -1,0 +1,281 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Sales Commission roadmap",
+    "output": "roadmap.html",
+    "quality_profile": "showcase",
+    "legend": {
+      "mode": "auto",
+      "entries": {
+        "backend": {
+          "label": "Milestone"
+        },
+        "security": {
+          "label": "Proof gate"
+        },
+        "cloud": {
+          "label": "Rollout step"
+        },
+        "external": {
+          "label": "Business input"
+        }
+      }
+    }
+  },
+  "lanes": [
+    {
+      "id": "inputs",
+      "label": "Needed from the business"
+    },
+    {
+      "id": "build",
+      "label": "Build"
+    },
+    {
+      "id": "rollout",
+      "label": "Proof and rollout"
+    }
+  ],
+  "phases": [
+    {
+      "id": "now",
+      "label": "Now",
+      "fromCol": 0,
+      "toCol": 1,
+      "variant": "emphasis"
+    },
+    {
+      "id": "control",
+      "label": "Control and scope",
+      "fromCol": 2,
+      "toCol": 3
+    },
+    {
+      "id": "launch",
+      "label": "Connect and launch",
+      "fromCol": 4,
+      "toCol": 5,
+      "variant": "dashed"
+    }
+  ],
+  "mainPath": [
+    "demo",
+    "m1",
+    "m2",
+    "m3",
+    "m4",
+    "m5",
+    "parallel"
+  ],
+  "nodes": [
+    {
+      "id": "in_scheme",
+      "lane": "inputs",
+      "col": 1,
+      "type": "external",
+      "label": "Real scheme",
+      "sublabel": "plus one month of data",
+      "tag": "needed now",
+      "width": 132
+    },
+    {
+      "id": "in_tax",
+      "lane": "inputs",
+      "col": 2,
+      "type": "external",
+      "label": "Tax, rates, approvals",
+      "sublabel": "Finance, management",
+      "width": 198
+    },
+    {
+      "id": "in_rules",
+      "lane": "inputs",
+      "col": 3,
+      "type": "external",
+      "label": "Bonus + clawback rules",
+      "sublabel": "Finance",
+      "width": 204
+    },
+    {
+      "id": "in_apis",
+      "lane": "inputs",
+      "col": 4,
+      "type": "external",
+      "label": "DMS + HR APIs",
+      "sublabel": "IT, HR",
+      "width": 140
+    },
+    {
+      "id": "demo",
+      "lane": "build",
+      "col": 0,
+      "type": "backend",
+      "label": "Core demo",
+      "sublabel": "mock data",
+      "tag": "done",
+      "width": 124
+    },
+    {
+      "id": "m1",
+      "lane": "build",
+      "col": 1,
+      "type": "backend",
+      "label": "M1 Finish",
+      "sublabel": "edit plans, import",
+      "tag": "next",
+      "width": 132
+    },
+    {
+      "id": "m2",
+      "lane": "build",
+      "col": 2,
+      "type": "backend",
+      "label": "M2 Control",
+      "sublabel": "approvals, audit, tax",
+      "width": 150
+    },
+    {
+      "id": "m3",
+      "lane": "build",
+      "col": 3,
+      "type": "backend",
+      "label": "M3 Extend",
+      "sublabel": "bonuses, overrides",
+      "width": 150
+    },
+    {
+      "id": "m4",
+      "lane": "build",
+      "col": 4,
+      "type": "backend",
+      "label": "M4 Integrate",
+      "sublabel": "DMS, HR, SSO",
+      "width": 136
+    },
+    {
+      "id": "m5",
+      "lane": "build",
+      "col": 5,
+      "type": "backend",
+      "label": "M5 Go live",
+      "sublabel": "Docker, security",
+      "width": 136
+    },
+    {
+      "id": "golden",
+      "lane": "rollout",
+      "col": 1,
+      "type": "security",
+      "label": "Golden-month test",
+      "sublabel": "engine vs Finance",
+      "tag": "key risk",
+      "width": 152
+    },
+    {
+      "id": "parallel",
+      "lane": "rollout",
+      "col": 5,
+      "type": "cloud",
+      "label": "Parallel run",
+      "sublabel": "then switch over",
+      "width": 132
+    }
+  ],
+  "edges": [
+    {
+      "from": "demo",
+      "to": "m1"
+    },
+    {
+      "from": "m1",
+      "to": "m2"
+    },
+    {
+      "from": "m2",
+      "to": "m3"
+    },
+    {
+      "from": "m3",
+      "to": "m4"
+    },
+    {
+      "from": "m4",
+      "to": "m5"
+    },
+    {
+      "from": "in_scheme",
+      "to": "m1",
+      "variant": "emphasis",
+      "route": "drop",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "from": "in_tax",
+      "to": "m2",
+      "route": "drop",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "from": "in_rules",
+      "to": "m3",
+      "route": "drop",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "from": "in_apis",
+      "to": "m4",
+      "route": "drop",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "from": "m1",
+      "to": "golden",
+      "variant": "security",
+      "route": "drop",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "from": "m5",
+      "to": "parallel",
+      "variant": "emphasis"
+    },
+    {
+      "from": "golden",
+      "to": "parallel",
+      "label": "evidence for sign-off",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Where we are",
+      "items": [
+        "Core demo built and tested on mock data",
+        "Next: real scheme and one real month"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Gates",
+      "items": [
+        "Every milestone has an exit test",
+        "Engine must match Finance on a real month first"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Rough size",
+      "items": [
+        "M1 1 to 2 weeks, M2 5 to 7, M3 4 to 6",
+        "M4 4 to 8, M5 3 to 5, one developer"
+      ]
+    }
+  ]
+}

@@ -51,6 +51,11 @@ Scale: 200 to 500 field staff, 4 regions today, monthly cycle plus quarterly and
 
 The demo came first, with mock data, so the business could judge the idea before integration work.
 
+![Roadmap: business inputs, build milestones and the proof and rollout path](diagrams/roadmap.png)
+
+Interactive version (pan, zoom, trace a path, export): open [diagrams/roadmap.html](diagrams/roadmap.html)
+in a browser after cloning or downloading the repository. The source is `diagrams/roadmap.json`.
+
 Changes from the split in [01-plan-and-scoping.md](01-plan-and-scoping.md): file import moves from M3 to M1,
 because testing the engine against a real month is the biggest risk reducer; clawbacks and reports are
 named explicitly in M3; hosting, security hardening and the parallel run become their own milestone (M5).
@@ -131,6 +136,13 @@ leaderboards, native/offline mobile app, forecasting.
 ---
 
 ## 4. Architecture
+
+![Architecture: people, Angular app, ASP.NET Core API, commission engine, PostgreSQL, identity, jobs and external systems](diagrams/architecture.png)
+
+Interactive version: [diagrams/architecture.html](diagrams/architecture.html). Each built component links to its
+source file. The source is `diagrams/architecture.json`. Dashed lines and "planned" tags are not built yet.
+
+Simplified view, which also renders directly on GitHub:
 
 ```mermaid
 flowchart LR

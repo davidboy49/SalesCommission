@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Sales Commission architecture",
+    "output": "architecture.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/davidboy49/SalesCommission",
+      "provider": "github",
+      "link_mode": "web",
+      "revision": "ebafd1845c0a531e0b3199a3f6a03d58d6298178"
+    }
+  },
+  "components": [
+    {
+      "id": "users",
+      "type": "external",
+      "label": "People",
+      "sublabel": "Rep · Supervisor · Finance",
+      "pos": [
+        40,
+        274
+      ],
+      "size": [
+        140,
+        64
+      ]
+    },
+    {
+      "id": "web",
+      "type": "frontend",
+      "label": "Angular app",
+      "sublabel": "Material 3 · lazy routes",
+      "tag": "phone + desktop",
+      "pos": [
+        270,
+        274
+      ],
+      "size": [
+        150,
+        64
+      ],
+      "sources": [
+        {
+          "path": "frontend/src/app/app.routes.ts",
+          "label": "routes and guards"
+        }
+      ]
+    },
+    {
+      "id": "api",
+      "type": "backend",
+      "label": "ASP.NET Core API",
+      "sublabel": ".NET 10 · /api",
+      "tag": "JWT + role scope",
+      "pos": [
+        520,
+        274
+      ],
+      "size": [
+        160,
+        64
+      ],
+      "sources": [
+        {
+          "path": "backend/src/SalesCommission.Api/Program.cs",
+          "label": "startup"
+        }
+      ]
+    },
+    {
+      "id": "engine",
+      "type": "backend",
+      "label": "Commission engine",
+      "sublabel": "pure domain library",
+      "tag": "29 tests",
+      "pos": [
+        520,
+        120
+      ],
+      "size": [
+        160,
+        64
+      ],
+      "sources": [
+        {
+          "path": "backend/src/SalesCommission.Domain/Calculation/CommissionCalculator.cs",
+          "label": "calculator"
+        }
+      ]
+    },
+    {
+      "id": "auth",
+      "type": "security",
+      "label": "Identity",
+      "sublabel": "local accounts → SSO",
+      "pos": [
+        520,
+        428
+      ],
+      "size": [
+        160,
+        64
+      ],
+      "sources": [
+        {
+          "path": "backend/src/SalesCommission.Api/Services/TokenService.cs",
+          "label": "tokens"
+        }
+      ]
+    },
+    {
+      "id": "db",
+      "type": "database",
+      "label": "PostgreSQL 17",
+      "sublabel": "EF Core · Npgsql",
+      "pos": [
+        790,
+        274
+      ],
+      "size": [
+        150,
+        64
+      ],
+      "sources": [
+        {
+          "path": "backend/src/SalesCommission.Infrastructure/Persistence/AppDbContext.cs",
+          "label": "schema"
+        }
+      ]
+    },
+    {
+      "id": "mock",
+      "type": "backend",
+      "label": "Mock data seeder",
+      "sublabel": "dev only · fixed seed",
+      "pos": [
+        790,
+        120
+      ],
+      "size": [
+        150,
+        64
+      ],
+      "sources": [
+        {
+          "path": "backend/src/SalesCommission.Infrastructure/Seeding/MockDataSeeder.cs",
+          "label": "seeder"
+        }
+      ]
+    },
+    {
+      "id": "jobs",
+      "type": "messagebus",
+      "label": "Background jobs",
+      "sublabel": "imports · month-end",
+      "tag": "planned M2",
+      "pos": [
+        790,
+        428
+      ],
+      "size": [
+        150,
+        64
+      ]
+    },
+    {
+      "id": "dms",
+      "type": "external",
+      "label": "DMS and HR",
+      "sublabel": "in-house systems",
+      "pos": [
+        1080,
+        428
+      ],
+      "size": [
+        160,
+        64
+      ],
+      "tag": "files today, APIs at M4"
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Server: local today, Docker on a VPS at M5",
+      "wraps": [
+        "web",
+        "api",
+        "engine",
+        "auth",
+        "db",
+        "mock",
+        "jobs"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "people-to-app",
+      "from": "users",
+      "to": "web",
+      "label": "HTTPS",
+      "variant": "emphasis"
+    },
+    {
+      "id": "app-to-api",
+      "from": "web",
+      "to": "api",
+      "label": "/api + token"
+    },
+    {
+      "id": "api-to-db",
+      "from": "api",
+      "to": "db",
+      "label": "SQL"
+    },
+    {
+      "id": "api-to-engine",
+      "from": "api",
+      "to": "engine",
+      "label": "calculate period",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "api-to-auth",
+      "from": "api",
+      "to": "auth",
+      "label": "sign-in, roles",
+      "variant": "security",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelDy": 24
+    },
+    {
+      "id": "seed-to-db",
+      "from": "mock",
+      "to": "db",
+      "label": "seed",
+      "variant": "dashed",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelDy": 24
+    },
+    {
+      "id": "jobs-to-db",
+      "from": "jobs",
+      "to": "db",
+      "label": "write imports",
+      "variant": "dashed",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "dms-to-jobs",
+      "from": "dms",
+      "to": "jobs",
+      "label": "sales, visits, staff",
+      "variant": "dashed"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Built today",
+      "items": [
+        "Angular app and .NET API on PostgreSQL",
+        "Engine: payout curves, collection gate, USD and KHR",
+        "Mock data seeder and role-scoped login"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Planned",
+      "items": [
+        "Background imports and month-end jobs (M2)",
+        "DMS API, HR sync and SSO (M4)",
+        "Docker, HTTPS proxy and backups on the VPS (M5)"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Guardrails",
+      "items": [
+        "The API enforces who sees whose pay",
+        "The engine has no framework dependencies",
+        "CI builds, tests and lints every push"
+      ]
+    }
+  ]
+}
