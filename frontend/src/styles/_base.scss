@@ -1,0 +1,157 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-large);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  text-wrap: balance;
+}
+
+h1 {
+  font: var(--mat-sys-headline-medium);
+}
+
+h2 {
+  font: var(--mat-sys-title-large);
+}
+
+h3 {
+  font: var(--mat-sys-title-medium);
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--mat-sys-primary);
+}
+
+// Icon font: only the @font-face ships with the self-hosted package, so the ligature rules live here.
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+// ---- layout helpers ----
+
+.page {
+  max-width: var(--app-page-max);
+  margin-inline: auto;
+  padding-block: var(--app-space-5) var(--app-space-7);
+  padding-inline: max(var(--app-space-4), env(safe-area-inset-left, 0px))
+    max(var(--app-space-4), env(safe-area-inset-right, 0px));
+  display: grid;
+  gap: var(--app-space-5);
+  align-content: start;
+}
+
+.grid {
+  display: grid;
+  gap: var(--app-space-4);
+}
+
+.tiles {
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+.cols-2 {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+}
+
+// A bordered surface for grouped content. Border + tint only; no shadow, so it reads the same in both themes.
+.card {
+  background: var(--mat-sys-surface-container-low);
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: var(--app-radius);
+  padding: var(--app-space-4) var(--app-space-5);
+  min-width: 0;
+}
+
+.card-title {
+  margin-bottom: var(--app-space-3);
+}
+
+.muted {
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+// Tables may be wider than the screen; they scroll inside their own container, never the page.
+// Cells stay on one line so a name or amount never breaks across rows.
+.table-scroll {
+  overflow-x: auto;
+}
+
+.mat-mdc-table .mat-mdc-header-cell,
+.mat-mdc-table .mat-mdc-cell,
+.mat-mdc-table .mat-mdc-footer-cell {
+  white-space: nowrap;
+}
+
+.toolbar-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--app-space-3);
+  align-items: center;
+}
+
+.toolbar-row .grow {
+  flex: 1 1 220px;
+}
+
+// Dense outlined fields for filter rows and the toolbar.
+.compact-field {
+  --mat-form-field-container-height: 40px;
+  --mat-form-field-container-vertical-padding: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,47 @@
+@use 'sass:string';
+@use '@angular/material' as mat;
+@use './theme-colors' as colors;
+
+// Material 3 with palettes generated from the brand teal (#0f766e) and an amber tertiary (#b45309).
+// Regenerate with: ng generate @angular/material:m3-theme (see theme-colors.scss).
+// Colours come from light-dark() tokens, so `color-scheme` alone switches the whole app.
+//
+// The family is quoted on purpose: it contains a bare "3", and an unquoted name like that makes
+// every `font:` shorthand built from these tokens invalid, so text silently falls back to serif.
+$font: (
+  string.unquote('"Source Sans 3 Variable"'),
+  system-ui,
+  -apple-system,
+  'Segoe UI',
+  sans-serif
+);
+
+html {
+  color-scheme: light dark;
+
+  @include mat.theme(
+    (
+      color: (
+        primary: colors.$primary-palette,
+        tertiary: colors.$tertiary-palette,
+        theme-type: color-scheme,
+      ),
+      typography: (
+        plain-family: $font,
+        brand-family: $font,
+      ),
+      density: 0,
+    )
+  );
+}
+
+// The theme toggle sets data-theme; with no attribute the OS preference applies.
+html[data-theme='light'] {
+  color-scheme: light;
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+@include mat.system-classes();

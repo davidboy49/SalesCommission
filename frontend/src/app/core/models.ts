@@ -1,4 +1,5 @@
-export type SalesRole = 'PreSales' | 'VanSales' | 'KeyAccount' | 'Merchandiser' | 'Supervisor' | 'Manager';
+export type SalesRole =
+  'PreSales' | 'VanSales' | 'KeyAccount' | 'Merchandiser' | 'Supervisor' | 'Manager';
 export type Currency = 'USD' | 'KHR';
 export type PeriodStatus = 'Open' | 'Calculated' | 'Locked';
 export type SalesBase = 'Invoiced' | 'NetOfReturns' | 'Collected';

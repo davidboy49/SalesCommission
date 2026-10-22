@@ -67,7 +67,10 @@ export class AuthService {
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const auth = inject(AuthService);
   const token = auth.session()?.token;
-  const authorized = token && req.url.startsWith(API_URL) ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } }) : req;
+  const authorized =
+    token && req.url.startsWith(API_URL)
+      ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
+      : req;
   return next(authorized).pipe(
     catchError((error: HttpErrorResponse) => {
       if (error.status === 401 && !req.url.endsWith('/auth/login')) auth.logout();

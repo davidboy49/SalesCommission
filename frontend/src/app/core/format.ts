@@ -47,7 +47,7 @@ export function achievementClass(achievement: number): 'good' | 'warn' | 'bad' {
 
 /** Bar fill (0–100) where a full bar means 120% achievement, so over-performance stays visible. */
 export function barWidth(achievement: number): number {
-  return Math.round(Math.min(Math.max(achievement, 0), 1.2) / 1.2 * 100);
+  return Math.round((Math.min(Math.max(achievement, 0), 1.2) / 1.2) * 100);
 }
 
 /** A KPI value in its natural unit: cases, money in the plan currency, a count, or a percentage. */

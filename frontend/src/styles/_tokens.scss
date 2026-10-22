@@ -1,0 +1,24 @@
+:root {
+  // spacing scale (4px base)
+  --app-space-1: 4px;
+  --app-space-2: 8px;
+  --app-space-3: 12px;
+  --app-space-4: 16px;
+  --app-space-5: 24px;
+  --app-space-6: 32px;
+  --app-space-7: 48px;
+
+  --app-page-max: 1240px;
+  --app-radius: var(--mat-sys-corner-medium);
+
+  // Status colours are fixed and never themed (data-viz palette). They always travel with an icon and a label.
+  --app-good: #0ca30c;
+  --app-warning: #fab219;
+  --app-serious: #ec835a;
+  --app-critical: #d03b3b;
+
+  // Tinted chip backgrounds, mixed into whatever surface the chip sits on.
+  --app-good-bg: color-mix(in srgb, var(--app-good) 16%, var(--mat-sys-surface));
+  --app-warning-bg: color-mix(in srgb, var(--app-warning) 22%, var(--mat-sys-surface));
+  --app-critical-bg: color-mix(in srgb, var(--app-critical) 14%, var(--mat-sys-surface));
+}

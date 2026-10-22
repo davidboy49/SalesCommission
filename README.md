@@ -40,9 +40,15 @@ Choose a period in the header; Admin/Finance press **Calculate** on the dashboar
 
 To reseed from scratch, drop the schema (`DROP SCHEMA public CASCADE; CREATE SCHEMA public;`) and restart the API.
 
-## Tests
+## Checks
 
 ```powershell
 dotnet test backend
+npm --prefix frontend run lint
+npm --prefix frontend run format:check
 npm --prefix frontend test -- --watch=false
+npm --prefix frontend run build
 ```
+
+CI runs these on every push and pull request. The UI conventions are in
+[docs/02-ui-foundation.md](docs/02-ui-foundation.md).
